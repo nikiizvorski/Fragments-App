@@ -13,12 +13,16 @@ public class MainActivity extends AppCompatActivity implements ListFragment.onRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListFragment fragment = new ListFragment();
+        ListFragment savedFragment = (ListFragment) getFragmentManager()
+                .findFragmentById(R.id.placeHolder);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.placeHolder, fragment);
-        fragmentTransaction.commit();
+        if(savedFragment == null) {
+            ListFragment fragment = new ListFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.placeHolder, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
