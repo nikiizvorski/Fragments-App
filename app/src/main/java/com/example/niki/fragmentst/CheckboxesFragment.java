@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 /**
  * Created by NIKI on 8/23/2016.
  */
-public class CheckboxesFragment extends Fragment {
+public abstract class CheckboxesFragment extends Fragment {
     private static final String KEY_CHECKED_BOXES = "key_checked_boxes";
     private CheckBox[] mCheckboxes;
 
@@ -20,16 +20,10 @@ public class CheckboxesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int index = getArguments().getInt(ViewPagerFragment.KEY_RECIPE_INDEX);
-        boolean isIngredients = getArguments().getBoolean(ViewPagerFragment.KEY_IS_INGREDIENTS);
         View view = inflater.inflate(R.layout.fragment_checkboxes, container, false);
 
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.checkBoxesLayout);
-        String[] contents;
-        if(isIngredients){
-           contents = Recepies.ingredients[index].split("`");
-        } else {
-            contents = Recepies.directions[index].split("`");
-        }
+        String[] contents = getContents(index);
         mCheckboxes = new CheckBox[contents.length];
         boolean[] checkedBoxes = new boolean[mCheckboxes.length];
         if(savedInstanceState != null && savedInstanceState.getBooleanArray(KEY_CHECKED_BOXES) != null){
@@ -38,6 +32,8 @@ public class CheckboxesFragment extends Fragment {
         setupCheckboxes(contents, linearLayout, checkedBoxes);
         return view;
     }
+
+    public abstract String[] getContents(int index);
 
     private void setupCheckboxes(String[] contents, ViewGroup container, boolean[] checkedBoxes){
         int i = 0;
