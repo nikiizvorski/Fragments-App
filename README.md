@@ -1,7 +1,9 @@
 # Fragments-App
 Using Fragments with Bundle, Keys and Saving the Instance State together with Tablet Layout and working with Transactions
 
-You can see how to work with Fragments and density from this project to see how to properly add DualPane and yo use Transactions
+You can see how to work with Fragments and density from this project to see how to properly add DualPane and to use Transactions
+
+Add a FragmentManager to handle the backstack of your fragments and to saveTheInstance state so whenever your fragment need to be recreated to check the state.
 
 How to use the Layouts to have a responsive and relative app which can run both on Phones and Tablets providing a great UX.
 
